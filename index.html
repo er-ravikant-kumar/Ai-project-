@@ -1,0 +1,707 @@
+`portfolio.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --dark: #333333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .skill-item {
+            padding: 20px;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .portfolio-img {
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(108, 99, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            margin: 15px;
+        }
+        
+        .testimonial-card:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 30px;
+            height: 30px;
+            background: white;
+            transform: rotate(45deg);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form .form-control {
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            padding-left: 20px;
+        }
+        
+        .contact-form textarea.form-control {
+            height: 150px;
+            padding-top: 15px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a52e4;
+            border-color: #5a52e4;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg {
+                opacity: 0.4;
+            }
+            
+            .hero-text {
+                text-align: center !important;
+            }
+            
+            .hero-btns {
+                justify-content: center !important;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero bg-light" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-text">
+                    <h6 class="text-primary mb-3">Hello, I'm</h6>
+                    <h1 class="display-4 fw-bold mb-3">John Doe</h1>
+                    <h2 class="text-gray mb-4">Full Stack Developer</h2>
+                    <p class="lead mb-4">I build exceptional digital experiences for the web.</p>
+                    <div class="d-flex hero-btns">
+                        <a href="#contact" class="btn btn-primary me-3">Hire Me</a>
+                        <a href="#portfolio" class="btn btn-outline-primary">View Work</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0213e0dd-e1a4-44b5-baad-8c970f9cb4c8.png" alt="Professional headshot of a developer in a modern office environment" class="img-fluid rounded-circle hero-img">
+                </div>
+            </div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/856a9a13-d63f-4fa1-8d29-e22ba7089785.png" alt="Abstract geometric background with purple and blue tones" class="hero-bg d-none d-lg-block">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c69ba436-f54f-4c33-86a9-768a17946bee.png" alt="Developer working on laptop at a clean modern desk with plants in the background" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-7">
+                    <h3 class="section-title">About Me</h3>
+                    <p class="mb-4">Hi, I'm John Doe, a passionate full stack developer with 5+ years of experience creating modern web applications.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5 class="mb-3 fw-bold">Personal Info</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>Name:</strong> John Doe</li>
+                                <li class="mb-2"><strong>Email:</strong> john@example.com</li>
+                                <li class="mb-2"><strong>Phone:</strong> +1 (555) 123-4567</li>
+                                <li class="mb-2"><strong>Location:</strong> San Francisco, CA</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="mb-3 fw-bold">What I Do</h5>
+                            <div class="d-flex mb-3">
+                                <div class="me-3">
+                                    <div class="bg-primary-light rounded p-2">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cb1c200a-3080-4e31-9f4a-7ea0bccabf83.png" alt="Code icon" class="img-fluid small-icon">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Web Development</h6>
+                                    <p class="mb-0 small">Building responsive websites and web applications</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <div class="bg-primary-light rounded p-2">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8bf7fef1-4457-409c-ba72-e20d6725c0c9.png" alt="Mobile app icon" class="img-fluid small-icon">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Mobile Development</h6>
+                                    <p class="mb-0 small">Creating cross-platform mobile applications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary mt-3" id="downloadCV">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section bg-light" id="skills">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="section-title">Skills & Expertise</h3>
+                    <p class="mb-5">I've worked with a wide variety of technologies in my journey as a developer.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="skill-item mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2e66acba-61ce-4126-bfdc-c073a1bef972.png" alt="Frontend development icon" class="me-3">
+                            <h5 class="mb-0 fw-bold">Frontend</h5>
+                        </div>
+                        <p class="mb-2"><span class="fw-bold">HTML5/CSS3:</span> <span class="skills-bar" data-width="95"></span></p>
+                        <p class="mb-2"><span class="fw-bold">JavaScript:</span> <span class="skills-bar" data-width="90"></span></p>
+                        <p class="mb-2"><span class="fw-bold">React:</span> <span class="skills-bar" data-width="85"></span></p>
+                        <p class="mb2"><span class="fw-bold">Bootstrap:</span> <span class="skills-bar" data-width="90"></span></p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="skill-item mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/43df0b89-3bdb-4d39-a5db-d0e1d137d75b.png" alt="Backend development icon" class="me-3">
+                            <h5 class="mb-0 fw-bold">Backend</h5>
+                        </div>
+                        <p class="mb-2"><span class="fw-bold">Node.js:</span> <span class="skills-bar" data-width="88"></span></p>
+                        <p class="mb-2"><span class="fw-bold">Express:</span> <span class="skills-bar" data-width="85"></span></p>
+                        <p class="mb-2"><span class="fw-bold">MongoDB:</span> <span class="skills-bar" data-width="80"></span></p>
+                        <p class="mb-2"><span class="fw-bold">REST API:</span> <span class="skills-bar" data-width="90"></span></p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="skill-item mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/33babb8c-9436-454d-987e-7cfa6d8a182e.png" alt="Tools and technologies icon" class="me-3">
+                            <h5 class="mb-0 fw-bold">Tools & More</h5>
+                        </div>
+                        <p class="mb-2"><span class="fw-bold">Git:</span> <span class="skills-bar" data-width="85"></span></p>
+                        <p class="mb-2"><span class="fw-bold">Docker:</span> <span class="skills-bar" data-width="75"></span></p>
+                        <p class="mb-2"><span class="fw-bold">AWS:</span> <span class="skills-bar" data-width="70"></span></p>
+                        <p class="mb-2"><span class="fw-bold">CI/CD:</span> <span class="skills-bar" data-width="80"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="section-title">My Portfolio</h3>
+                    <p class="mb-5">Here are some of my recent projects.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6bbe276e-cbef-4a49-9cdd-c4551755def0.png" alt="E-commerce dashboard interface with analytics charts and product listings" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-white text-center">
+                                <h4 class="text-white">E-commerce Dashboard</h4>
+                                <p class="mb-3">React, Node.js, MongoDB</p>
+                                <a href="#" class="btn btn-outline-light mx-2">Details</a>
+                                <a href="#" class="btn btn-light mx-2">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a47981ff-391c-44ea-b9de-fed1d307fc25.png" alt="Fitness mobile application showing workout tracking and progress graphs" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-white text-center">
+                                <h4 class="text-white">Fitness Tracker App</h4>
+                                <p class="mb-3">React Native, Firebase</p>
+                                <a href="#" class="btn btn-outline-light mx-2">Details</a>
+                                <a href="#" class="btn btn-light mx-2">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6d9fa3c8-4b4a-425c-906d-62f63a1beb13.png" alt="Project management tool with kanban board and task organization interface" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-white text-center">
+                                <h4 class="text-white">Project Management Tool</h4>
+                                <p class="mb-3">Vue.js, Node.js, PostgreSQL</p>
+                                <a href="#" class="btn btn-outline-light mx-2">Details</a>
+                                <a href="#" class="btn btn-light mx-2">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section bg-light" id="testimonials">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="section-title">Client Testimonials</h3>
+                    <p class="mb-5">What my clients say about my work.</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="testimonial-card">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cb83944d-3496-4cb9-b026-485c3fc90f56.png" alt="Portrait of Sarah Johnson, Marketing Director at TechCorp" class="rounded-circle me-3" width="60">
+                                        <div>
+                                            <h5 class="mb-1">Sarah Johnson</h5>
+                                            <p class="text-muted mb-0 small">Marketing Director, TechCorp</p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">"Working with John was an absolute pleasure. He delivered our e-commerce platform ahead of schedule and the results have been fantastic. His attention to detail and problem-solving skills are exceptional."</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1a941be4-d9eb-41cd-a729-360bd652916a.png" alt="Portrait of Michael Chen, CEO of StartupX" class="rounded-circle me-3" width="60">
+                                        <div>
+                                            <h5 class="mb-1">Michael Chen</h5>
+                                            <p class="text-muted mb-0 small">CEO, StartupX</p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">"John transformed our business with his custom CRM solution. He understood our needs perfectly and implemented a system that has significantly improved our workflow and customer relations."</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6a2f2fed-62ac-436c-8f65-15b483202671.png" alt="Portrait of Emma Davis, Product Manager at DigitalAgency" class="rounded-circle me-3" width="60">
+                                        <div>
+                                            <h5 class="mb-1">Emma Davis</h5>
+                                            <p class="text-muted mb-0 small">Product Manager, DigitalAgency</p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">"We've worked with many developers over the years, but John stands out for his clear communication, reliability, and technical expertise. He becomes a true partner in every project."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="section-title">Get In Touch</h3>
+                    <p class="mb-5">Have a project in mind? Feel free to contact me.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <form class="contact-form" id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h4 class="fw-bold mb-4">Contact Info</h4>
+                        <div class="d-flex mb-4">
+                            <div class="social-icon">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/33454244-0bf2-425a-bc60-1f1812730e58.png" alt="Email icon">
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Email</h6>
+                                <p class="mb-0">john@example.com</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="social-icon">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/47cde2a5-d3f7-45f6-bdbd-6cb89a6b40ce.png" alt="Phone icon">
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Phone</h6>
+                                <p class="mb-0">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="social-icon">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0668a373-66a2-4131-abb6-a9770a2d6c19.png" alt="Location pin icon">
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Location</h6>
+                                <p class="mb-0">123 Tech Street, San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <h5 class="fw-bold mb-3">Follow Me</h5>
+                        <div class="d-flex">
+                            <a href="#" class="social-icon me-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/32da59af-60e1-4aba-a433-2007d2ba7f08.png" alt="LinkedIn logo">
+                            </a>
+                            <a href="#" class="social-icon me-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d9c9c30a-ced2-4b86-b6c7-ca6eea88e9a0.png" alt="GitHub logo">
+                            </a>
+                            <a href="#" class="social-icon me-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/60834293-ba63-4f0d-be93-64209ec0fe9e.png" alt="Twitter logo">
+                            </a>
+                            <a href="#" class="social-icon">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9912f8af-e2a7-4c7f-bfa4-1c4d24d1d0fa.png" alt="Instagram logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h4 class="fw-bold mb-3">John Doe</h4>
+                    <p class="mb-4">Full Stack Developer | Creating digital experiences that matter</p>
+                    <div class="d-flex justify-content-center mb-4">
+                        <a href="#" class="text-white mx-2">Home</a>
+                        <a href="#" class="text-white mx-2">About</a>
+                        <a href="#" class="text-white mx-2">Portfolio</a>
+                        <a href="#" class="text-white mx-2">Contact</a>
+                    </div>
+                    <p class="mb-0">© 2023 John Doe. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu when a link is clicked
+                        const navbarCollapse = document.querySelector('.navbar-collapse');
+                        if (navbarCollapse.classList.contains('show')) {
+                            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+            
+            // Animate skills bars
+            const animateSkills = function() {
+                const skillBars = document.querySelectorAll('.skills-bar');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                });
+            };
+            
+            // Initialize skills animation when section is in view
+            const skillsSection = document.getElementById('skills');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSkills();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Here you would normally send the form data to a server
+                    // For demo purposes we'll just show an alert
+                    alert('Thank you for your message! I will get back to you soon.');
+                    this.reset();
+                });
+            }
+            
+            // CV download button
+            const downloadCV = document.getElementById('downloadCV');
+            if (downloadCV) {
+                downloadCV.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Downloading CV... (This is a demo)');
+                });
+            }
+            
+            // Initialize Bootstrap tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+        
+        // Simulate React-like functionality with vanilla JS
+        class PortfolioApp {
+            constructor() {
+                this.state = {
+                    activeTab: 'home'
+                };
+            }
+            
+            setState(newState) {
+                this.state = { ...this.state, ...newState };
+                this.render();
+            }
+            
+            render() {
+                // This simulates what React would do with state changes
+                console.log('App re-rendered with state:', this.state);
+            }
+        }
+        
+        // Initialize the "app"
+        const app = new PortfolioApp();
+    </script>
+</body>
+</html>
+
+```
